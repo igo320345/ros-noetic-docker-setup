@@ -1,0 +1,51 @@
+version: '2'
+
+networks:
+  ros:
+    driver: bridge
+
+services:
+  ros-master:
+    image: osrf/ros:noetic-desktop-full
+    command: stdbuf -o L roscore
+    networks:
+      - ros
+    restart: always
+  
+  ros-bridge:
+    build: 
+      context: .
+      dockerfile: Dockerfile-ros-bridge
+    depends_on:
+      - ros-master
+    environment:
+      - "ROS_MASTER_URI=http://ros-master:11311"
+    networks:
+      - ros
+    ports:
+      - 9090:9090
+    restart: always
+
+  webviz:
+    image: cruise/webviz:latest
+    depends_on:
+      - ros-bridge
+    environment:
+      - "ROS_MASTER_URI=http://ros-master:11311"
+    networks:
+      - ros
+    ports:
+      - 8080:8080
+    restart: always
+  
+  ros-workspace:
+    build: 
+      context: .
+      dockerfile: Dockerfile-ros-workspace
+    depends_on:
+      - ros-master
+    environment:
+      - "ROS_MASTER_URI=http://ros-master:11311"
+    networks:
+      - ros
+    restart: always
