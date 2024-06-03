@@ -6,7 +6,6 @@
     <xacro:include filename="$(find example-package)/urdf/robot_model.gazebo" />
     <xacro:include filename="$(find example-package)/urdf/wheel.xacro" />
     <xacro:include filename="$(find example-package)/urdf/inertial.xacro" />
-    <xacro:include filename="$(find example-package)/urdf/camera.xacro" />
 
     <link name="dummy_link"/>
     <joint name="dummy_joint" type="fixed">
@@ -57,7 +56,20 @@
         </visual>
     </link>
 
-    <xacro:camera x ="0.025" y="0.275" z="0.325"/>
+    <link name='camera_link'>
+        <visual name='camera_visual'>
+            <origin xyz="0 0 0" rpy=" 0 0 0"/>
+            <geometry>
+                <box size=".05 .05 .05"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+    <joint type="fixed" name="camera_joint">
+        <origin xyz="0.025 0.275 0.325" rpy="0 0 ${pi/2}"/>
+        <child link="camera_link"/>
+        <parent link="base_link"/>
+    </joint>
 
     <xacro:wheel side="left" x="-0.325" y="0.15" z="0.1"/>
     <xacro:wheel side="right" x="0.325" y="0.15" z="0.1"/>

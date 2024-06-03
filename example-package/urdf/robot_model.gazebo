@@ -12,11 +12,11 @@
         <material>Gazebo/Black</material>
     </gazebo>
 
-    <gazebo reference="camera">
+    <gazebo reference="camera_link">
         <material>Gazebo/Blue</material>
     </gazebo>
 
-    <gazebo reference="camera">
+    <gazebo reference="camera_link">
         <sensor type="camera" name="camera1">
             <update_rate>30.0</update_rate>
             <camera name="head">
@@ -34,10 +34,10 @@
             <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
                 <alwaysOn>true</alwaysOn>
                 <updateRate>0.0</updateRate>
-                <cameraName>diff_drive_robot/camera1</cameraName>
+                <cameraName>camera1</cameraName>
                 <imageTopicName>image_raw</imageTopicName>
                 <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-                <frameName>camera</frameName>
+                <frameName>camera_link</frameName>
                 <hackBaseline>0.07</hackBaseline>
                 <distortionK1>0.0</distortionK1>
                 <distortionK2>0.0</distortionK2>
@@ -46,5 +46,25 @@
                 <distortionT2>0.0</distortionT2>
             </plugin>
         </sensor>
+    </gazebo>
+    <gazebo>
+        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+            <updateRate>30.0</updateRate>
+            <leftJoint>wheel_left_joint</leftJoint>
+            <rightJoint>wheel_right_joint</rightJoint>
+            <wheelSeparation>0.65</wheelSeparation>
+            <wheelDiameter>0.2</wheelDiameter>
+            <wheelAcceleration>1.0</wheelAcceleration>
+            <wheelTorque>20</wheelTorque>
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <robotBaseFrame>dummy_link</robotBaseFrame>
+            <odometrySource>1</odometrySource>
+            <publishWheelTF>true</publishWheelTF>
+            <publishOdom>true</publishOdom>
+            <publishWheelJointState>true</publishWheelJointState>
+            <legacyMode>false</legacyMode>
+        </plugin>
     </gazebo>
 </robot>

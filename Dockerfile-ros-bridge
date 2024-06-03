@@ -2,4 +2,4 @@ FROM osrf/ros:noetic-desktop-full
 
 RUN apt-get update && apt-get install -q -y --no-install-recommends ros-noetic-rosbridge-suite
 
-CMD roslaunch rosbridge_server rosbridge_websocket.launch
+CMD roslaunch rosbridge_server rosbridge_websocket.launch --wait
