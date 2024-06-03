@@ -1,0 +1,10 @@
+FROM gazebo:libgazebo11
+
+RUN apt update
+RUN apt install -q -y --no-install-recommends libjansson-dev libboost-dev imagemagick curl wget libtinyxml-dev git cmake build-essential
+RUN /bin/bash -c  "curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh --output install.sh"
+RUN /bin/bash -c "bash install.sh"
+RUN /bin/bash -c "source ~/.nvm/nvm.sh && source ~/.bashrc && nvm install 8"
+RUN /bin/bash -c "git clone https://github.com/osrf/gzweb && cd gzweb/ && source /usr/share/gazebo/setup.sh && source ~/.nvm/nvm.sh && source ~/.bashrc && npm run deploy --- "
+
+CMD /bin/bash -c "cd gzweb/ && source ~/.nvm/nvm.sh && source ~/.bashrc && npm start -p 8181"

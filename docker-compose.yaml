@@ -37,6 +37,21 @@ services:
     ports:
       - 8080:8080
     restart: always
+
+  gzweb:
+    build:
+      context: .
+      dockerfile: Dockerfile-gzweb
+    depends_on:
+      - ros-workspace
+    environment:
+      - "ROS_MASTER_URI=http://ros-master:11311"
+      - "GAZEBO_MASTER_URI=http://ros-workspace:11345"
+    networks:
+      - ros
+    ports:
+      - 8181:8181
+    restart: always
   
   ros-workspace:
     build: 
