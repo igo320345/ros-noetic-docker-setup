@@ -6,12 +6,6 @@
     <xacro:include filename="$(find example-package)/urdf/robot_model.gazebo" />
     <xacro:include filename="$(find example-package)/urdf/wheel.xacro" />
     <xacro:include filename="$(find example-package)/urdf/inertial.xacro" />
-
-    <link name="dummy_link"/>
-    <joint name="dummy_joint" type="fixed">
-        <parent link="dummy_link"/>
-        <child link="base_link"/>
-    </joint>
     
     <link name='base_link'>
         <origin xyz="0.0 0.0 0.1" rpy="0.0 0 0.0"/>

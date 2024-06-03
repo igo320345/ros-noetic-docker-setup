@@ -59,7 +59,7 @@
             <commandTopic>cmd_vel</commandTopic>
             <odometryTopic>odom</odometryTopic>
             <odometryFrame>odom</odometryFrame>
-            <robotBaseFrame>dummy_link</robotBaseFrame>
+            <robotBaseFrame>base_link</robotBaseFrame>
             <odometrySource>1</odometrySource>
             <publishWheelTF>true</publishWheelTF>
             <publishOdom>true</publishOdom>

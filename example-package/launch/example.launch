@@ -4,8 +4,8 @@
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="false"/>
-        <arg name="headless" value="false"/>
         <arg name="debug" value="false"/>
+        <arg name="verbose" value="true"/>
     </include>
     <param name="robot_description" command="xacro '$(find example-package)/urdf/robot_model.xacro'" />
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
