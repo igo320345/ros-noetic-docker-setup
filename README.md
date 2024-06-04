@@ -1,4 +1,4 @@
-# ROS Noetic setup for macOS
+# ROS Noetic setup with Docker
 
 ```
 docker compose build
