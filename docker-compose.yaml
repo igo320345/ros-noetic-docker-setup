@@ -57,12 +57,20 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile-ros-workspace
+    tty: true
+    stdin_open: true
+    init: true
     depends_on:
       - ros-master
+    entrypoint: ["/bin/bash", "-ci", "cd ros_ws/ \ 
+      && rosdep install --from-paths src --ignore-src -r -y && catkin build \
+      && source devel/setup.bash && xvfb-run roslaunch example-package example.launch --wait"]
     environment:
       - "ROS_MASTER_URI=http://ros-master:11311"
     networks:
       - ros
+    volumes:
+      - ./example-package:/ros_ws/src/example-package
     restart: always
 
   ssh: 

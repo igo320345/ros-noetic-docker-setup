@@ -1,16 +1,9 @@
 FROM osrf/ros:noetic-desktop-full
-
-WORKDIR /ros_ws
-COPY ./example-package /ros_ws/src/example-package
+SHELL [ "/bin/bash", "-ci" ]
 
 RUN apt-get update && apt-get install -q -y --no-install-recommends python3-catkin-tools \
-ros-noetic-catkin python3-rosdep ros-noetic-gazebo-ros-pkgs ros-noetic-gazebo-ros-control \
-xvfb
+ros-noetic-catkin python3-rosdep xvfb
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash \
-&& catkin init && rosdep update \
-&& rosdep install --from-paths src --ignore-src -r -y \
-&& catkin build \
-&& source devel/setup.bash"
-
-CMD /bin/bash -ci "source devel/setup.bash \
-&& xvfb-run roslaunch example-package example.launch --wait"
+&& mkdir ros_ws && cd ros_ws/ && mkdir src \
+&& catkin init \
+&& catkin build"

@@ -64,6 +64,20 @@
         <child link="camera_link"/>
         <parent link="base_link"/>
     </joint>
+    <link name="lidar_link">
+            <visual name='lidar_visual'>
+                <origin xyz="0 0 0" rpy=" 0 0 0"/>
+                <geometry>
+                    <box size=".05 .05 .05"/>
+                </geometry>
+                <material name="red"/>
+            </visual>
+        </link>
+        <joint name="lidar_joint" type="fixed">
+            <origin xyz="-0.025 0.275 0.325" rpy="0 0 ${pi/2}"/>
+            <child link="lidar_link"/>
+            <parent link="base_link"/>
+        </joint>
 
     <xacro:wheel side="left" x="-0.325" y="0.15" z="0.1"/>
     <xacro:wheel side="right" x="0.325" y="0.15" z="0.1"/>
