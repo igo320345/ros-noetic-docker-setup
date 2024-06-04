@@ -64,3 +64,19 @@ services:
     networks:
       - ros
     restart: always
+
+  ssh: 
+    build: 
+      context: .
+      dockerfile: Dockerfile-ssh
+    depends_on:
+      - ros-master
+    tty: true
+    stdin_open: true
+    environment:
+      - "ROS_MASTER_URI=http://ros-master:11311"
+    networks:
+      - ros
+    ports:
+      - 2222:22
+    restart: always
