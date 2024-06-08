@@ -15,7 +15,7 @@ services:
   ros-bridge:
     build: 
       context: .
-      dockerfile: Dockerfile-ros-bridge
+      dockerfile: docker/Dockerfile-ros-bridge
     depends_on:
       - ros-master
     environment:
@@ -41,7 +41,7 @@ services:
   gzweb:
     build:
       context: .
-      dockerfile: Dockerfile-gzweb
+      dockerfile: docker/Dockerfile-gzweb
     depends_on:
       - ros-workspace
     environment:
@@ -56,7 +56,7 @@ services:
   ros-workspace:
     build: 
       context: .
-      dockerfile: Dockerfile-ros-workspace
+      dockerfile: docker/Dockerfile-ros-workspace
     tty: true
     stdin_open: true
     init: true
@@ -70,13 +70,13 @@ services:
     networks:
       - ros
     volumes:
-      - ./example-package:/ros_ws/src/example-package
+      - ./:/ros_ws/src/
     restart: always
 
   ssh: 
     build: 
       context: .
-      dockerfile: Dockerfile-ssh
+      dockerfile: docker/Dockerfile-ssh
     depends_on:
       - ros-master
     tty: true

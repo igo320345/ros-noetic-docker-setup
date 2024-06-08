@@ -1,5 +1,5 @@
 # ROS Noetic setup with Docker
-
+Replace `example-package` with your ROS package
 ```
 docker compose build
 docker compose up
