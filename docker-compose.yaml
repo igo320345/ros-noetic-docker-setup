@@ -63,7 +63,7 @@ services:
     depends_on:
       - ros-master
     entrypoint: ["/bin/bash", "-ci", "cd ros_ws/ \ 
-      && rosdep install --from-paths src --ignore-src -r -y && catkin build \
+      && rosdep install --from-paths src --ignore-src -r -y && catkin build && chmod -R +x src/example-package/scripts \
       && source devel/setup.bash && xvfb-run roslaunch example-package example.launch --wait"]
     environment:
       - "ROS_MASTER_URI=http://ros-master:11311"

@@ -5,7 +5,8 @@ RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/s
 
 RUN useradd -m -s /bin/bash ros
 RUN echo "ros:admin" | chpasswd
-
+RUN adduser ros sudo
+RUN apt-get install ros-noetic-teleop-twist-keyboard
 EXPOSE 22
 
 ENTRYPOINT service ssh start && bash
